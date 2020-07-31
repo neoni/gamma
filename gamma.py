@@ -218,39 +218,39 @@ class gamma_hooks_t(ida_hexrays.Hexrays_Hooks):
                     #print(line)
                     tmp = line[x]
                     for i in range(x-1, -1, -1):
-                        if not line[i].isalnum() and line[i] is not '_':
+                        if not line[i].isalnum() and line[i] != '_':
                             break
                         tmp = line[i] + tmp
                     for i in range(x+1, len(line)):
-                        if line[i] is ' ':
+                        if line[i] == ' ':
                             if tmp:
                                 items.append(tmp)
                                 tmp = ''
-                        elif line[i] is '[':
+                        elif line[i] == '[':
                             if tmp:
                                 items.append(tmp)
                                 tmp = ''
                             items.append(line[i])
-                        elif line[i] is ']':
+                        elif line[i] == ']':
                             if tmp:
                                 items.append(tmp)
                             if '[' in items:
                                 items.append(line[i])
                             break
-                        elif line[i] is '-':
+                        elif line[i] == '-':
                             if tmp:
                                 items.append(tmp)
-                            if line[i+1] is '>':
+                            if line[i+1] == '>':
                                 tmp = '-'
                             else:
                                 break
-                        elif line[i] is '>':
-                            if tmp is '-':
+                        elif line[i] == '>':
+                            if tmp == '-':
                                 tmp = ''
                                 items.append('->')
                             else:
                                 break
-                        elif line[i].isalnum() or line[i] is '_':
+                        elif line[i].isalnum() or line[i] == '_':
                             tmp = tmp + line[i]
                         else:
                             if tmp:
